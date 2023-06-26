@@ -20,7 +20,7 @@ int _printf(const char *format, ...)
 
 	va_start(str, format);
 	if (format == NULL)
-		return -1;
+		return (-1);
 	while (*chr)
 	{
 		if (*chr == '%')
@@ -33,20 +33,20 @@ int _printf(const char *format, ...)
 					break;
 				case 'c':
 					c = va_arg(str, int);
-					write (1, &c, 1);
+					write(1, &c, 1);
 					ch++;
 					break;
 				case 's':
 					s = va_arg(str, char *);
-					for (;*s; s++)
+					for (; *s; s++)
 					{
-						write (1, s, 1);
+						write(1, s, 1);
 						ch++;
 					}
 					break;
 				case '%':
 					per = '%';
-					write (1, &per, 1);
+					write(1, &per, 1);
 					ch++;
 					break;
 				default:
@@ -62,5 +62,5 @@ int _printf(const char *format, ...)
 	}
 	va_end(str);
 	return (ch);
-	
+
 }
