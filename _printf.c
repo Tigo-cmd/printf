@@ -15,6 +15,8 @@ int _printf(const char *format, ...)
 	char c;
 	char *s;
 	char per;
+	int i;
+	int d;
 
 	va_list str;
 
@@ -47,6 +49,16 @@ int _printf(const char *format, ...)
 				case '%':
 					per = '%';
 					write(1, &per, 1);
+					ch++;
+					break;
+				case 'i':
+					i = va_arg(str, int);
+					write(1, &i, 1);
+					ch++;
+					break;
+				case 'd':
+					d = va_arg(str, int);
+					write(1, &d, 1);
 					ch++;
 					break;
 				default:
