@@ -12,11 +12,11 @@
 */
 int *_charstring(va_list str, char *chr, int *ch)
 {
-	ch = 0;
 	char c;
 	char *s;
 	char per;
 
+	ch = 0;
 	switch (*chr)
 	{
 		case '\0':
