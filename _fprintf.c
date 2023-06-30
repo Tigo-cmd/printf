@@ -15,7 +15,7 @@ int _fprintf(const char *constant, int *first, va_list passed)
 		{'c', _retch}, {'i', _retint}, {'b', _retbin},
 		{'d', _retint}, {'s', _retstr}, {'%', _retper},
 		{'X', _ret_hex_up}, {'x', _ret_hex_low}, {'o', _ret_octal},
-		{'u',_ret_usign}, {'\0', NULL}
+		{'u',_ret_usign}, {'r', _retrev}, {'\0', NULL}
 	};
 	for (a = 0; pnt[a].s != '\0'; a++)
 	{

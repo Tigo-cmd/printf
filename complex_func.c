@@ -65,3 +65,34 @@ int _ret_hex_low(va_list passed)
 	}
 	return (trace);
 }
+/**
+* _retrev - handles the reverse string conversion in lowercase.
+* @passed: argument starter.
+*
+* Return: char_counts.
+*/
+int _retrev(va_list passed)
+{
+	char *n;
+	char swap;
+	int inc = 0, iterate, rev;
+
+	n = va_arg(passed, char *);
+	if (n == NULL)
+		n = "NULL";
+	while (n[inc] == '\0')
+	{
+		inc++;
+	}
+	iterate = --inc;
+	while (rev < iterate)
+	{
+		swap = n[rev];
+
+		n[rev] = n[iterate];
+		n[iterate] = swap;
+		rev++;
+		iterate--;
+	}
+	return (write(1, &n[rev], rev));
+}
