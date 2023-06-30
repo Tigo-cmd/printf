@@ -75,24 +75,26 @@ int _retrev(va_list passed)
 {
 	char *n;
 	char swap;
-	int inc = 0, iterate, rev;
+	int inc = 0,rev = 0;
 
 	n = va_arg(passed, char *);
 	if (n == NULL)
+	{
 		n = "NULL";
-	while (n[inc] == '\0')
+		return (-1);
+	}
+	while (n[inc])
 	{
 		inc++;
 	}
-	iterate = --inc;
-	while (rev < iterate)
+	inc = inc - 1;
+	while (inc >= 0)
 	{
-		swap = n[rev];
+		swap = n[inc];
 
-		n[rev] = n[iterate];
-		n[iterate] = swap;
+		write(1, &swap, 1);
+		inc--;
 		rev++;
-		iterate--;
 	}
-	return (write(1, &n[rev], rev));
+	return (rev);
 }
