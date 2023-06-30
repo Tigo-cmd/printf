@@ -50,7 +50,7 @@ int _retbin(va_list passed)
 		c = ent % 2;
 		if (c == 0)
 		{
-			inc[++trace] = '0';
+			inc[trace++] = '0';
 		}
 		else
 		{
@@ -97,16 +97,16 @@ int _retint(va_list passed)
 	int negcheck = 0;
 
 	ent = va_arg(passed, int);
+	if (ent == 0)
+		inc[trace++] = '0';
 	if (ent < 0)
 	{
 		ent = ent / -1;
 		negcheck = 1;
 	}
-	if (ent == 0)
-		inc[trace = trace + 1] = '0';
 	do {
 		bit = ent % 10;
-		inc[++trace] = bit + '0';
+		inc[trace++] = bit + '0';
 		ent = ent / 10;
 	} while (ent > 0);
 

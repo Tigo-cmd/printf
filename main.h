@@ -26,4 +26,5 @@ int _retint(va_list passed);
 int _ret_hex_up(va_list passed);
 int _ret_hex_low(va_list passed);
 int _ret_octal(va_list passed);
+int _ret_usign(va_list passed);
 #endif
