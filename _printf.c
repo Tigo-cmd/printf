@@ -1,78 +1,67 @@
 #include "main.h"
-#include <stdarg.h>
-#include <unistd.h>
 /**
 * _printf - my clone of the printf function
 * @format: the character string. it is to be strictly followed
 *
 * Decsription: function that produces output according to a format
-* Return: number of charcters printed
+* Return: number of charcters print
 */
 int _printf(const char *format, ...)
 {
 	char *chr = (char *)format;
 	int ch = 0;
-	char c;
-	char *s;
-	char per;
-	int i;
-	int d;
+	int i = 0, c = 0;
+	int print;
 
-	va_list str;
+	va_list passed;
 
-	va_start(str, format);
 	if (format == NULL)
 		return (-1);
-	while (*chr)
+
+	va_start(passed, format);
+	while (chr[i] != '\0')
 	{
-		if (*chr == '%')
+		if (chr[i] == '%')
 		{
-			chr++;
-			switch (*chr)
+			i++;
+			switch (chr[i])
 			{
-				case '\0':
+				case '-':
+					++i;
+					print = _fprintf(format, &i, passed);
 					break;
+				case '0':
+					i++;
+					print = _fprintf(format, &i, passed);
 					break;
-				case 'c':
-					c = va_arg(str, int);
-					write(1, &c, 1);
-					ch++;
+				case '+':
+					i++;
+					print = _fprintf(format, &i, passed);
 					break;
-				case 's':
-					s = va_arg(str, char *);
-					for (; *s; s++)
-					{
-						write(1, s, 1);
-						ch++;
-					}
+				case '#':
+					i++;
+					print = _fprintf(format, &i, passed);
 					break;
-				case '%':
-					per = '%';
-					write(1, &per, 1);
-					ch++;
-					break;
-				case 'i':
-					i = va_arg(str, int);
-					write(1, &i, 1);
-					ch++;
-					break;
-				case 'd':
-					d = va_arg(str, int);
-					write(1, &d, 1);
-					ch++;
+				case ' ':
+					i++;
+					print = _fprintf(format, &i, passed);
 					break;
 				default:
+					 print = _fprintf(format, &i, passed);
 					break;
+				if (print == -1)
+					return (print);
 			}
+			ch = ch + print;
 		}
 		else
 		{
-			write(1, chr, 1);
+			c = write(1, &chr[i], 1);
+			if (c == -1)
+				return (-1);
 			ch++;
 		}
-		chr++;
+		i++;
 	}
-	va_end(str);
 	return (ch);
-
 }

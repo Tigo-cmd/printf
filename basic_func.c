@@ -1,6 +1,6 @@
 #include "main.h"
 /**
-* _retch - prints the (%c) conversion specifier 
+* _retch - prints the (%c) conversion specifier
 * @passed: first argument parameter
 *
 * Return: char_count printed
@@ -13,7 +13,7 @@ int _retch(va_list passed)
 }
 
 /**
-* _retstr - handles the (%s) conversion specifier 
+* _retstr - handles the (%s) conversion specifier
 * @passed: first argument parameter
 *
 * Return: string_count printed
@@ -27,10 +27,10 @@ int _retstr(va_list passed)
 	{
 		i++;
 	}
-	return (write(1, &str[0], i);
+	return (write(1, &str[0], i));
 }
 /**
-* _retbin - prints the binary  conversion specifier 
+* _retbin - prints the binary  conversion specifier
 * @passed: first argument parameter
 *
 * Return: binary_count printed
@@ -61,7 +61,7 @@ int _retbin(va_list passed)
 	b = trace - 1;
 	while (b >= 0)
 	{
-		write(1, &inc[b], 1);
+		ver = write(1, &inc[b], 1);
 		if (ver == -1)
 			return (-1);
 		b--;
@@ -69,7 +69,7 @@ int _retbin(va_list passed)
 	return (trace);
 }
 /**
-* _retper - prints the percent(%%) conversion specifier 
+* _retper - prints the percent(%%) conversion specifier
 * @passed: first argument parameter
 *
 * Return: char_count printed
@@ -78,10 +78,10 @@ int _retper(va_list passed)
 {
 	(void)(passed);
 
-	return (write(1, "%%", 1);
+	return (write(1, "%%", 1));
 }
 /**
-* _retint - prints the (%i%d) conversion specifier 
+* _retint - prints the (%i%d) conversion specifier
 * @passed: first argument parameter
 *
 * Return: int_count printed
@@ -92,26 +92,25 @@ int _retint(va_list passed)
 	int bit;
 	char p = '-';
 	char inc[31 + 1];
-	int trace;
+	int trace = 0;
 	int b = 0;
 	int negcheck = 0;
 
 	ent = va_arg(passed, int);
 	if (ent < 0)
 	{
-		negcheck = 1;
 		ent = ent / -1;
+		negcheck = 1;
 	}
-	if (n == 0)
+	if (ent == 0)
 		inc[trace = trace + 1] = '0';
-	do
-	{
+	do {
 		bit = ent % 10;
 		inc[++trace] = bit + '0';
 		ent = ent / 10;
-	}
-	while(ent > 0);
-	if (negcheck != 0 && negcheck == 1)
+	} while (ent > 0);
+
+	if (negcheck)
 		inc[trace++] = p;
 	b = trace - 1;
 	while (b >= 0)
